@@ -48,11 +48,10 @@ import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.shapes
 
 @Composable
-fun Login() {
+fun Login(goToPage: (() -> Unit)? = null) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-
     Surface(Modifier.background(color = MaterialTheme.colors.background)) {
 
         Column(
@@ -120,7 +119,7 @@ fun Login() {
 
             Spacer(modifier = Modifier.height(40.dp))
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { goToPage?.invoke() },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = MaterialTheme.colors.secondary
                 ),

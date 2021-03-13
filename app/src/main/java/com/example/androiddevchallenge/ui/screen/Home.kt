@@ -177,7 +177,8 @@ fun DesignYourGarden() {
             }
         )
 
-        Icon(imageVector = Icons.Default.FilterList, contentDescription = "",
+        Icon(
+            imageVector = Icons.Default.FilterList, contentDescription = "",
             modifier = Modifier
                 .constrainAs(icon) {
                     end.linkTo(parent.end, margin = 16.dp)
@@ -185,9 +186,7 @@ fun DesignYourGarden() {
                 }
                 .size(24.dp)
         )
-
     }
-
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -195,15 +194,12 @@ fun DesignYourGarden() {
     ) {
         itemsIndexed(templates) { index, it ->
 
-
             ConstraintLayout(
                 Modifier
                     .height(64.dp)
                     .fillMaxWidth()
             ) {
                 val (image, title, desc, divider, checkbox) = createRefs()
-
-
 
                 Image(
                     contentScale = ContentScale.Crop,
@@ -260,7 +256,6 @@ fun DesignYourGarden() {
                         .padding(end = 16.dp),
                     startIndent = (64 + 8).dp
                 )
-
             }
         }
     }

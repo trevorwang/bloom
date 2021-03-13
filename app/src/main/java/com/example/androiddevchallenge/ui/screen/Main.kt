@@ -25,6 +25,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Launch
+import androidx.compose.material.icons.filled.Login
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,6 +45,8 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
     object Profile : Screen("profile", "Profile", Icons.Default.AccountCircle)
     object Favorites : Screen("favorites", "Favorites", Icons.Default.FavoriteBorder)
     object Cart : Screen("cart", "Cart", Icons.Default.ShoppingCart)
+    object Login : Screen("login", "Login", Icons.Default.Login)
+    object Welcome : Screen("welcome", "Welcome", Icons.Default.Launch)
 }
 
 val items = listOf(

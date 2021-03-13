@@ -46,7 +46,7 @@ import com.example.androiddevchallenge.ui.theme.pink900
 import com.example.androiddevchallenge.ui.theme.shapes
 
 @Composable
-fun Welcome() {
+fun Welcome(goToPage: (() -> Unit)? = null) {
 
     val isLightTheme = MaterialTheme.colors.isLight
     val welcomeBg =
@@ -60,7 +60,6 @@ fun Welcome() {
     Surface(
         Modifier
             .background(MaterialTheme.colors.primary)
-            .padding(16.dp)
     ) {
         Box(Modifier.fillMaxSize()) {
 
@@ -74,7 +73,7 @@ fun Welcome() {
 
                 Row {
 
-                    Spacer(modifier = Modifier.size(88.dp))
+                    Spacer(modifier = Modifier.size(108.dp))
                     Image(
                         painter = painterResource(id = welcomeIllos),
                         contentDescription = "welcome image"
@@ -102,6 +101,7 @@ fun Welcome() {
                     ),
                     shape = shapes.medium,
                     modifier = Modifier
+                        .padding(start = 16.dp, end = 16.dp)
                         .height(48.dp)
                         .fillMaxWidth()
                 ) {
@@ -113,7 +113,7 @@ fun Welcome() {
                 Spacer(modifier = Modifier.height(8.dp))
 
                 TextButton(
-                    onClick = { /*TODO*/ },
+                    onClick = { goToPage?.invoke() },
                     modifier = Modifier
                         .height(48.dp)
                         .fillMaxWidth(),
