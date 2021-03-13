@@ -28,9 +28,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
@@ -57,6 +59,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.MyTheme
@@ -161,26 +164,47 @@ fun DesignYourGarden() {
         Pair(R.mipmap.img_1, "Snake plant"),
         Pair(R.mipmap.img, "Pothos"),
     )
-
-    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Bottom) {
+    ConstraintLayout(
+        modifier = Modifier
+            .padding(top = 16.dp)
+            .fillMaxWidth()
+    ) {
+        val (text, icon) = createRefs()
         Text(
             text = "Design your home garden", style = MaterialTheme.typography.h1,
-            modifier = Modifier.padding(top = 16.dp)
+            modifier = Modifier.constrainAs(text) {
+                start.linkTo(parent.start)
+            }
         )
-        Icon(imageVector = Icons.Default.FilterList, contentDescription = "")
+
+        Icon(imageVector = Icons.Default.FilterList, contentDescription = "",
+            modifier = Modifier
+                .constrainAs(icon) {
+                    end.linkTo(parent.end, margin = 16.dp)
+                    baseline.linkTo(text.baseline)
+                }
+                .size(24.dp)
+        )
+
     }
+
 
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(top = 8.dp)
     ) {
-        items(templates) {
-            Row(
+        itemsIndexed(templates) { index, it ->
+
+
+            ConstraintLayout(
                 Modifier
                     .height(64.dp)
                     .fillMaxWidth()
-                    .padding(end = 16.dp)
             ) {
+                val (image, title, desc, divider, checkbox) = createRefs()
+
+
+
                 Image(
                     contentScale = ContentScale.Crop,
                     painter = painterResource(id = it.first),
@@ -188,29 +212,55 @@ fun DesignYourGarden() {
                     modifier = Modifier
                         .fillMaxHeight()
                         .aspectRatio(1f)
+                        .constrainAs(image) {
+                            start.linkTo(parent.start, 0.dp)
+                            top.linkTo(parent.top, 0.dp)
+                        }
                 )
-                Column(modifier = Modifier.padding(start = 16.dp)) {
-                    Text(
-                        text = it.second,
-                        style = MaterialTheme.typography.h2,
-                        modifier = Modifier.padding(top = 8.dp)
-                    )
-
-                    Text(
-                        text = "This is a description",
-                        style = MaterialTheme.typography.body1,
-                    )
-
-                    Divider(color = Color(0xFF9E9E9E), modifier = Modifier.padding(top = 16.dp))
-                }
                 Checkbox(
-                    checked = true,
+                    checked = index == 0,
                     onCheckedChange = { /*TODO*/ },
-                    modifier = Modifier.padding(start = 16.dp),
+                    modifier = Modifier
+                        .constrainAs(checkbox) {
+                            end.linkTo(parent.end, 16.dp)
+                            centerVerticallyTo(image)
+                        },
                     colors = CheckboxDefaults.colors(
                         checkmarkColor = MaterialTheme.colors.background
                     )
                 )
+
+                Text(
+                    text = it.second,
+                    style = MaterialTheme.typography.h2,
+                    modifier = Modifier
+                        .constrainAs(title) {
+                            start.linkTo(image.end, 16.dp)
+                            baseline.linkTo(parent.baseline)
+                        }
+                )
+
+                Text(
+                    text = "This is a description",
+                    style = MaterialTheme.typography.body1,
+                    modifier = Modifier.constrainAs(desc) {
+                        start.linkTo(title.start)
+                        top.linkTo(title.bottom, 4.dp)
+                        bottom.linkTo(parent.bottom, 16.dp)
+                    }
+
+                )
+
+                Divider(
+                    color = Color(0xFF9E9E9E),
+                    modifier = Modifier
+                        .constrainAs(divider) {
+                            bottom.linkTo(parent.bottom, 0.dp)
+                        }
+                        .padding(end = 16.dp),
+                    startIndent = (64 + 8).dp
+                )
+
             }
         }
     }
