@@ -17,27 +17,59 @@ package com.example.androiddevchallenge.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.example.androiddevchallenge.R
+
+
+val NunitoSans = FontFamily(
+    Font(R.font.nunitosans_light, FontWeight.Light),
+    Font(R.font.nunitosans_bold, FontWeight.Bold),
+    Font(R.font.nunitosans_semibold, FontWeight.SemiBold)
+)
 
 // Set of Material typography styles to start with
 val typography = Typography(
+
+    h1 = TextStyle(
+        fontFamily = NunitoSans,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+    ),
+
+    h2 = TextStyle(
+        fontFamily = NunitoSans,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Bold,
+        letterSpacing = 0.15.sp
+    ),
+    subtitle1 = TextStyle(
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Light,
+        fontFamily = NunitoSans,
+    ),
     body1 = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
-    )
-        /* Other default text styles to override
-    button = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.W500,
+        fontFamily = NunitoSans,
+        fontWeight = FontWeight.Light,
         fontSize = 14.sp
     ),
-    caption = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
+    body2 = TextStyle(
+        fontFamily = NunitoSans,
+        fontWeight = FontWeight.Light,
         fontSize = 12.sp
-    )
-    */
+    ),
+    button = TextStyle(
+        fontFamily = NunitoSans,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.SemiBold,
+        letterSpacing = 1.sp
+    ),
+    caption = TextStyle(
+        fontFamily = NunitoSans,
+        fontSize = 12.sp,
+        fontWeight = FontWeight.SemiBold,
+    ),
 )
