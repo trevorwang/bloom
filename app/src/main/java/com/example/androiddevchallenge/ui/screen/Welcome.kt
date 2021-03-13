@@ -17,6 +17,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -102,19 +103,11 @@ fun Welcome() {
 
 
 
-                Button(
+                TextButton(
                     onClick = { /*TODO*/ },
                     modifier = Modifier
                         .height(48.dp)
                         .fillMaxWidth(),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color.Transparent,
-                        disabledBackgroundColor = Color.Transparent,
-                        disabledContentColor = Color.Transparent,
-                        contentColor = Color.Transparent
-                    ),
-                    border = BorderStroke(0.dp, Color.Transparent),
-                    elevation = null
                 ) {
                     Text(
                         text = "Log in",
@@ -123,7 +116,6 @@ fun Welcome() {
                         textAlign = TextAlign.Center
                     )
                 }
-
 
             }
         }
