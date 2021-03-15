@@ -19,13 +19,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -69,19 +69,14 @@ fun Welcome(goToPage: (() -> Unit)? = null) {
             )
 
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                Spacer(Modifier.size(72.dp))
-
-                Row {
-
-                    Spacer(modifier = Modifier.size(108.dp))
-                    Image(
-                        painter = painterResource(id = welcomeIllos),
-                        contentDescription = "welcome image"
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(48.dp))
-
+                Image(
+                    painter = painterResource(id = welcomeIllos),
+                    contentDescription = "welcome image",
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(top = 72.dp, start = 88.dp, bottom = 48.dp)
+                        .offset(x = 40.dp),
+                )
                 Image(
                     painter = painterResource(id = logo),
                     contentDescription = "logo"
